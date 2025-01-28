@@ -27,8 +27,6 @@ Create 3 button where player can pick rock, paper, scissors
   GET things that player pick
   SET playerSelection = things that player pick.
   
-  
-  
 computer auto pick
   CALL random and assign result of random to val
   IF val <= 0 and < 1/3 THEN computerSelection = rock
@@ -55,9 +53,9 @@ add 1 to the total score of the winner when they win
   IF player wins, increase playerScore by 1
   ELSE IF computer wins, increase computerScore by 1;
   ENDIF
-repeat 5 time.
-  FOR 5 times
-  Call playRound
+  Check result each round
+Announce a winner of the game once one player reaches 5 points.
+
 */
 
 // Create 3 button where player can pick rock, paper, scissors
@@ -143,19 +141,24 @@ function playGame(humanChoice, playerScore, computerScore) {
   const computerSelection = getComputerChoice();
 
   // add 1 to the total score of the winner when they win
-
   const val = playRound(playerSelection, computerSelection);
   if (val === 1) playerScore.value++;
   else if (val === 0) computerScore.value++;
 
-  console.log(
-    `Your score: ${playerScore.value}, Computer's score: ${computerScore.value}`
-  );
+  displayResult(playerScore, computerScore);
+}
 
-  // Announce a winner of the game once one player reaches 5 points.
+function displayResult(playerScore, computerScore) {
+  const displayedResult = document.querySelector("div");
+  displayedResult.innerHTML = `Your score: ${playerScore.value}, Computer's score: ${computerScore.value}`;
+
   if (playerScore.value === 5) {
-    console.log("You completely win. Congratulation!");
+    const finalResult = document.createElement("div");
+    finalResult.innerHTML = "You completely win. Congratulation";
+    displayedResult.append(finalResult);
   } else if (computerScore.value === 5) {
-    console.log("You completely lose.");
+    const finalResult = document.createElement("div");
+    finalResult.innerHTML = "You completely lose.";
+    displayedResult.append(finalResult);
   }
 }
