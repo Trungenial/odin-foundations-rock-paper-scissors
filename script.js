@@ -58,7 +58,6 @@ repeat 5 time.
 */
 
 // Create a form where user can pick
-//  GET player's input, lowercase it and assign it to playerSelection
 function getHumanChoice() {
   const playerInput = prompt("Please select one of the Rock, Paper, Scissors");
   const playerSelection = playerInput.toLowerCase();
@@ -66,11 +65,7 @@ function getHumanChoice() {
   return playerSelection;
 }
 
-// computer auto pick
-//   CALL random and assign result of random to val
-//   IF val >= 0 and < 1/3 THEN computerSelection = rock
-//   ELSE IF val >= 1/3 and < 2/3 THEN computerSelection = paper
-//   ELSE IF val >= 2/3 and < 1 THEN computerSelection = scissors
+// Random computerSelection
 function getComputerChoice() {
   const val = Math.random();
   let computerSelection = "";
@@ -85,21 +80,7 @@ function getComputerChoice() {
   return computerSelection;
 }
 
-// compare the two selections
-//   IF playerSelection = rock and computerSelection = rock THEN print Tie!
-//   ELSE IF playerSelection = rock and computerSelection = paper THEN print "You lose!, <computer's choice> beats <your choice>"
-//   ELSE IF playerSelection = rock and computerSelection = scissors THEN print "You win!, <your choice> beats <computer's choice>"
-
-//   IF playerSelection = paper and computerSelection = paper THEN print Tie!
-//   ELSE IF playerSelection = paper and computerSelection = scissors THEN print "You lose!, <computer's choice> beats <your choice>"
-//   ELSE IF playerSelection = paper and computerSelection = rock THEN print "You win!, <your choice> beats <computer's choice>"
-
-//   IF playerSelection = scissors and computerSelection = scissors THEN print Tie!
-//   ELSE IF playerSelection = scissors and computerSelection = rock THEN print "You lose!, <computer's choice> beats <your choice>"
-//   ELSE IF playerSelection = scissors and computerSelection = paper THEN print "You win!, <your choice> beats <computer's choice>"
-//   IF player win, return 1
-//   ELSE IF player lose, return 0
-//   ELSE IF tie, return -1
+// compare two selections
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === "rock" && computerSelection === "paper") {
     console.log(`You lose!, ${computerSelection} beats ${playerSelection}`);
@@ -139,12 +120,6 @@ function playRound(playerSelection, computerSelection) {
 }
 
 // repeat 5 time.
-//   FOR 5 times
-//    Call playRound
-//    PRINT Your score and computer's score
-//   IF playerScore > computerScore THEN PRINT You completely win. Congratulation!
-//   ELSE IF playerScore < computerScore THEN PRINT You completely lose.
-//   ELSE PRINT Completely tie!.
 function playGame() {
   let playerScore = 0;
   let computerScore = 0;
@@ -154,10 +129,6 @@ function playGame() {
     const computerSelection = getComputerChoice();
 
     // add 1 to the total score of the winner when they win
-    //   INIT playerScore = 0 and computerScore = 0;
-    //   IF player wins, increase playerScore by 1
-    //   ELSE IF computer wins, increase computerScore by 1;
-    //   ENDIF
 
     const val = playRound(playerSelection, computerSelection);
     if (val === 1) playerScore++;
