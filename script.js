@@ -124,20 +124,16 @@ function playGame() {
   let playerScore = 0;
   let computerScore = 0;
 
-  for (let i = 0; i <= 4; i++) {
-    const playerSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
+  const playerSelection = getHumanChoice();
+  const computerSelection = getComputerChoice();
 
-    // add 1 to the total score of the winner when they win
+  // add 1 to the total score of the winner when they win
 
-    const val = playRound(playerSelection, computerSelection);
-    if (val === 1) playerScore++;
-    else if (val === 0) computerScore++;
+  const val = playRound(playerSelection, computerSelection);
+  if (val === 1) playerScore++;
+  else if (val === 0) computerScore++;
 
-    console.log(
-      `Your score: ${playerScore}, Computer's score: ${computerScore}`
-    );
-  }
+  console.log(`Your score: ${playerScore}, Computer's score: ${computerScore}`);
 
   if (playerScore > computerScore) {
     console.log("You completely win. Congratulation!");
