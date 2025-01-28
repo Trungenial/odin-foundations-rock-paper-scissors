@@ -1,18 +1,17 @@
 /*
 Create a rock, paper, scissors game
 I/ Request:
-When player enter one of rock, paper, or scissors
+When player click one of rock, paper, or scissors
 Computer auto pick a rock, paper, or scissors itself
 Compare the selection between player and computer
   If player wins, print "You win!, <your choice> beats <computer's choice>"
   If player lose, print "You lose!, <computer's choice> beats <your choice>"
   If tie, print tie
 When one wins a round, add 1 to the total score of the winner
-There are total 5 round.
+Announce a winner of the game once one player reaches 5 points.
 
 II/ Divide the request.
-Create a form where player can pick
-  (auto lowercase player's selection)
+Create 3 button where player can pick rock, paper, scissors
 
 computer auto pick
 
@@ -20,11 +19,15 @@ compare the two selections
 
 add 1 to the total score of the winner when they win
 
-repeat 5 time.
+Announce a winner of the game once one player reaches 5 points.
+
 
 III/ Pseudocode
-Create a form where user can pick
-  GET player's input, lowercase it and assign it to playerSelection
+Create 3 button where player can pick rock, paper, scissors
+  GET things that player pick
+  SET playerSelection = things that player pick.
+  
+  
   
 computer auto pick
   CALL random and assign result of random to val
@@ -57,9 +60,19 @@ repeat 5 time.
   Call playRound
 */
 
-// Create a form where user can pick
-function getHumanChoice() {
-  const playerInput = prompt("Please select one of the Rock, Paper, Scissors");
+// Create 3 button where player can pick rock, paper, scissors
+//  GET things that player pick
+//  SET playerSelection = things that player pick.
+const selections = document.querySelectorAll(".selection");
+selections.forEach((selection) => {
+  selection.addEventListener("click", () => {
+    const playerInput = selection.innerHTML;
+    const humanChoice = getHumanChoice(playerInput);
+    playGame(humanChoice, playerScore, computerScore);
+  });
+});
+
+function getHumanChoice(playerInput) {
   const playerSelection = playerInput.toLowerCase();
 
   return playerSelection;
@@ -119,29 +132,30 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-// repeat 5 time.
-function playGame() {
-  let playerScore = 0;
-  let computerScore = 0;
-
-  const playerSelection = getHumanChoice();
+let playerScore = {
+  value: 0,
+};
+let computerScore = {
+  value: 0,
+};
+function playGame(humanChoice, playerScore, computerScore) {
+  const playerSelection = humanChoice;
   const computerSelection = getComputerChoice();
 
   // add 1 to the total score of the winner when they win
 
   const val = playRound(playerSelection, computerSelection);
-  if (val === 1) playerScore++;
-  else if (val === 0) computerScore++;
+  if (val === 1) playerScore.value++;
+  else if (val === 0) computerScore.value++;
 
-  console.log(`Your score: ${playerScore}, Computer's score: ${computerScore}`);
+  console.log(
+    `Your score: ${playerScore.value}, Computer's score: ${computerScore.value}`
+  );
 
-  if (playerScore > computerScore) {
+  // Announce a winner of the game once one player reaches 5 points.
+  if (playerScore.value === 5) {
     console.log("You completely win. Congratulation!");
-  } else if (playerScore < computerScore) {
+  } else if (computerScore.value === 5) {
     console.log("You completely lose.");
-  } else {
-    console.log("Completely tie!");
   }
 }
-
-playGame();
